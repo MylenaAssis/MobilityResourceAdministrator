@@ -4,7 +4,7 @@ import br.com.mylena.cadastrodeveiculos.domain.shared.TransportMode;
 
 import java.util.UUID;
 
-public class MobilityResource {
+public abstract class MobilityResource implements Vehicle {
     //Os modais de transporte são: rodoviário, ferroviário, aquaviário, aeroviário e dutoviário. Tipos: carro, moto, caminhão etc. Model se refe ao modelo do veículo que pretendemos cadastrar.
     private TransportMode mode;
     private String type;
@@ -34,4 +34,6 @@ public class MobilityResource {
     public UUID getId() {
         return id;
     }
+
+    public abstract void registerSpecificVehicleData();
 }

@@ -3,6 +3,7 @@ package br.com.mylena.cadastrodeveiculos;
 import br.com.mylena.cadastrodeveiculos.dao.IMobilityResourceDAO;
 import br.com.mylena.cadastrodeveiculos.dao.MobilityResourceDAO;
 import br.com.mylena.cadastrodeveiculos.domain.MobilityResource;
+import br.com.mylena.cadastrodeveiculos.domain.VehicleFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.swing.*;
@@ -58,30 +59,57 @@ public class App {
     }
 
     private static void Register(String data) {
-        String[] splitData = data.split(",", -1); // -1 mantém campos vazios no final
+
+        String[] splitData = data.split(",", -1);
         int expectedFields = 3;
         String[] resultData = new String[expectedFields];
 
         for (int i = 0; i < expectedFields; i++) {
             if (i < splitData.length && !splitData[i].isBlank()) {
-                resultData[i] = splitData[i];
+                resultData[i] = splitData[i].trim();
             } else {
                 resultData[i] = null;
             }
         }
 
-        MobilityResource mobilityResource = new MobilityResource(
-                resultData[0], //modal
-                resultData[1], //tipo de veículo
-                resultData[2] //modelo do veículo
-        );
+        try {
 
-        Boolean registered = iMobilityResourceDAO.register(mobilityResource);
+            MobilityResource mobilityResource =
+                    VehicleFactory.create(
+                            resultData[0],
+                            resultData[1],
+                            resultData[2]
+                    );
 
-        if (registered) {
-            JOptionPane.showMessageDialog(null, "Meio de transporte cadastrado com sucesso.", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Falha no registro.", "ERRO DE CADASTRO", JOptionPane.ERROR_MESSAGE);
+            // dados específicos do tipo de veiculo
+            mobilityResource.registerSpecificVehicleData();
+
+            Boolean registered = iMobilityResourceDAO.register(mobilityResource);
+
+            if (registered) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Meio de transporte cadastrado com sucesso.",
+                        "SUCESSO",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Falha no registro.",
+                        "ERRO DE CADASTRO",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Erro no cadastro: " + e.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 

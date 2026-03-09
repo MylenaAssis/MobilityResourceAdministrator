@@ -1,6 +1,6 @@
 package br.com.mylena.cadastrodeveiculos.domain;
 
-import java.util.UUID;
+import javax.swing.*;
 
 public class Bicycle extends MobilityResource {
     private String model;
@@ -9,11 +9,16 @@ public class Bicycle extends MobilityResource {
 
     private Boolean hasGears;
 
-    public Bicycle(String modeInput, String type, String model, String color, String bikeType, Boolean hasGears) {
+    public Bicycle(String modeInput, String type, String model) {
         super(modeInput, type, model);
-        this.model = model;
-        this.color = color;
-        this.bikeType = bikeType;
-        this.hasGears = hasGears;
+    }
+
+    @Override
+    public void registerSpecificVehicleData() {
+        this.color = JOptionPane.showInputDialog("Color:");
+        this.bikeType = JOptionPane.showInputDialog("Bike type:");
+        this.hasGears = Boolean.parseBoolean(
+                JOptionPane.showInputDialog("Has gears? true/false")
+        );
     }
 }

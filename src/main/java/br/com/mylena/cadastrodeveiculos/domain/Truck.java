@@ -2,19 +2,37 @@ package br.com.mylena.cadastrodeveiculos.domain;
 
 import br.com.mylena.cadastrodeveiculos.domain.shared.Propulsion;
 
+import javax.swing.*;
 import java.util.UUID;
 
 public class Truck extends MobilityResource {
+
     private String color;
-    private Enum<Propulsion> propulsionType;
+    private Propulsion propulsionType;
     private int loadCapacity;
     private int axles;
 
-    public Truck(String modeInput, String type, String model, String color, Enum<Propulsion> propulsionType, int loadCapacity, int axles) {
+    public Truck(String modeInput, String type, String model) {
         super(modeInput, type, model);
-        this.color = color;
-        this.propulsionType = propulsionType;
-        this.loadCapacity = loadCapacity;
-        this.axles = axles;
+    }
+
+    @Override
+    public void registerSpecificVehicleData() {
+
+        this.color = JOptionPane.showInputDialog("Informe a cor do caminhão:");
+
+        String propulsionInput = JOptionPane.showInputDialog(
+                "Informe o tipo de propulsão (GASOLINE, DIESEL, ELECTRIC, HYBRID):"
+        );
+
+        this.propulsionType = Propulsion.valueOf(propulsionInput.toUpperCase());
+
+        this.loadCapacity = Integer.parseInt(
+                JOptionPane.showInputDialog("Informe a capacidade de carga (kg):")
+        );
+
+        this.axles = Integer.parseInt(
+                JOptionPane.showInputDialog("Informe a quantidade de eixos:")
+        );
     }
 }
