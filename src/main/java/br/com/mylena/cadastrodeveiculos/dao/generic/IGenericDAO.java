@@ -4,5 +4,6 @@ import java.util.Collection;
 
 public interface IGenericDAO<T> {
     public Boolean register(T entity);
-    public void delete(Long value);
+    public void delete(String value);
+    public String findByCode(String code);
 }

@@ -3,12 +3,9 @@ package br.com.mylena.cadastrodeveiculos;
 import br.com.mylena.cadastrodeveiculos.dao.IMobilityResourceDAO;
 import br.com.mylena.cadastrodeveiculos.dao.MobilityResourceDAO;
 import br.com.mylena.cadastrodeveiculos.domain.MobilityResource;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.swing.*;
-
-import static org.springframework.boot.SpringApplication.exit;
 
 @SpringBootApplication
 public class App {
@@ -40,10 +37,8 @@ public class App {
                 exit();
             } else if (isRegister(option)) {
                 String data = JOptionPane.showInputDialog(null, "Digite os dados do meio de transporte" +
-                        "separados por vírgula. Ex: Modo,Nome", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                        "separados por vírgula. Ex: Modal,tipo,modelo", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 Register(data);
-
-
             }
         }
     }
@@ -64,7 +59,7 @@ public class App {
 
     private static void Register(String data) {
         String[] splitData = data.split(",", -1); // -1 mantém campos vazios no final
-        int expectedFields = 2;
+        int expectedFields = 3;
         String[] resultData = new String[expectedFields];
 
         for (int i = 0; i < expectedFields; i++) {
@@ -75,17 +70,18 @@ public class App {
             }
         }
 
-        MobilityResource client = new MobilityResource(
-                resultData[0],
-                resultData[1]
+        MobilityResource mobilityResource = new MobilityResource(
+                resultData[0], //modal
+                resultData[1], //tipo de veículo
+                resultData[2] //modelo do veículo
         );
 
-        Boolean registered = iClientDAO.register(client);
+        Boolean registered = iMobilityResourceDAO.register(mobilityResource);
 
         if (registered) {
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso.", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Meio de transporte cadastrado com sucesso.", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "O CPF é obrigatório.", "ERRO DE CADASTRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Falha no registro.", "ERRO DE CADASTRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
