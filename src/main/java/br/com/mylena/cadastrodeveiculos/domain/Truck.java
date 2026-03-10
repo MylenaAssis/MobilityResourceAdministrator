@@ -5,6 +5,7 @@ import br.com.mylena.cadastrodeveiculos.domain.shared.Propulsion;
 import javax.swing.*;
 import java.util.UUID;
 
+@Tabela("Truck")
 public class Truck extends MobilityResource {
 
     private String color;
