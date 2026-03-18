@@ -1,4 +1,4 @@
-package br.com.mylena.cadastrodeveiculos.domain;
+package br.com.mylena.cadastrodeveiculos.domain.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

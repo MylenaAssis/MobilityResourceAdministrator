@@ -1,7 +1,7 @@
-package br.com.mylena.cadastrodeveiculos;
+package br.com.mylena.cadastrodeveiculos.otheractivities;
 
 import br.com.mylena.cadastrodeveiculos.domain.Car;
-import br.com.mylena.cadastrodeveiculos.domain.Priority;
+import br.com.mylena.cadastrodeveiculos.domain.annotations.Priority;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

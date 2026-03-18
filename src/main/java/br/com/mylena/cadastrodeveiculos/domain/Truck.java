@@ -1,9 +1,9 @@
 package br.com.mylena.cadastrodeveiculos.domain;
 
+import br.com.mylena.cadastrodeveiculos.domain.annotations.Tabela;
 import br.com.mylena.cadastrodeveiculos.domain.shared.Propulsion;
 
 import javax.swing.*;
-import java.util.UUID;
 
 @Tabela("Truck")
 public class Truck extends MobilityResource {

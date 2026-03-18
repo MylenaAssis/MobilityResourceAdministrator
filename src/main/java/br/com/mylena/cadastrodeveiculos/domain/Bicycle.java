@@ -1,5 +1,7 @@
 package br.com.mylena.cadastrodeveiculos.domain;
 
+import br.com.mylena.cadastrodeveiculos.domain.annotations.Tabela;
+
 import javax.swing.*;
 @Tabela("Bicycle")
 public class Bicycle extends MobilityResource {

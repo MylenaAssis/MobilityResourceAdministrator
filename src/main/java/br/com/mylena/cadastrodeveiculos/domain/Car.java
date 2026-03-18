@@ -1,5 +1,7 @@
 package br.com.mylena.cadastrodeveiculos.domain;
 
+import br.com.mylena.cadastrodeveiculos.domain.annotations.Priority;
+import br.com.mylena.cadastrodeveiculos.domain.annotations.Tabela;
 import br.com.mylena.cadastrodeveiculos.domain.shared.Propulsion;
 
 import javax.swing.*;
