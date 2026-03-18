@@ -19,6 +19,8 @@ public abstract class MobilityResource implements Vehicle {
         this.model = model;
     }
 
+    public MobilityResource() {}
+
     public String getMode() {
         return mode.name();
     }

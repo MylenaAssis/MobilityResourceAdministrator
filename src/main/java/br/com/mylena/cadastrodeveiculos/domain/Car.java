@@ -3,10 +3,11 @@ package br.com.mylena.cadastrodeveiculos.domain;
 import br.com.mylena.cadastrodeveiculos.domain.shared.Propulsion;
 
 import javax.swing.*;
-import java.util.UUID;
 
 @Tabela("Car")
+@Priority("Média")
 public class Car extends MobilityResource {
+    @Priority("Baixa")
     private String bodyType;
     private String color;
     private Propulsion propulsionType;
@@ -15,6 +16,9 @@ public class Car extends MobilityResource {
 
     public Car(String modeInput, String type, String model) {
         super(modeInput, type, model);
+    }
+    public Car() {
+        super();
     }
 
     @Override
